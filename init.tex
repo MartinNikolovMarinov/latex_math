@@ -24,8 +24,30 @@
 % Provides an underline command which will break over line ends:
 \usepackage{ulem}
 
+% Hyper links to places inside the document:
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    % These take rgb values as a fraction of n/255.
+    % That is really not how RGB works!
+    linkcolor=[rgb]{0.1, 0.2, 1},
+    filecolor=[rgb]{0.1, 0.2, 1},
+    urlcolor=[rgb]{0.1, 0.2, 1},
+    citecolor=[rgb]{0.1, 0.2, 1},
+    unicode=true,
+}
+\urlstyle{same}
+
+% Bibliography:
+\usepackage{csquotes}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{init.bib}
+
 % For inserting loremipsum random text:
 \usepackage[pangram]{blindtext}
+
+% Allows adding sub tex files to the main tex file:
+\usepackage{subfiles} % Best loaded last in the preamble
 
 % #################### DOCUMENT BEGIN ####################
 
@@ -69,26 +91,44 @@
 
 \newpage
 
-8. LaTeX Page layout and Measurements (width=linewidth):
-\begin{center}
-    \includegraphics[width=\linewidth]{page_layout.png}
-\end{center}
+\tableofcontents
+\listoffigures
+\listoftables
+\setcounter{section}{8}
 
-9. LARGE text: \\
+\newpage
+
+\section{LaTeX includegraphics wrapped in a figure}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\linewidth]{page_layout.png}
+    \caption{LaTeX Page layout and Measurements (width=linewidth)}
+    \label{hr_3}
+\end{figure}
+
+\section{Section with subsections}
+
+\subsection{LARGE text}
 {\LARGE \indent Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
 
-10. huge text with bold, italic and standard underline \\
+\subsection{huge text with bold, italic and standard underline}
 {\huge \indent Nisi qui \textbf{culpa} \textit{pariatur} \underline{velit deserunt} nulla nulla dolor cillum est do nulla ut.} \\
 
-11. Huge text with combined bold, italic and standard underline \\
+\subsection{Huge text with combined bold, italic and standard underline}
 {\Huge \indent Nisi qui culpa pariatur velit deserunt \underline{\textbf{\textit{nulla dolor cillum est}}} do nulla ut.} \\
 
-12. This is what happens when you underline long text: \\
+\subsection{This is what happens when you underline long text}
 \underline{\textbf{Unerlining a long string of text is kinda hard in latex with the default underline so we can use ulem}. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.} \\
 
-12. We can finx the above problem with the package ulem using uline: \\
+\subsection{We can fix the above problem with the package ulem using uline}
 \uline{\textbf{Same with ulem}. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
 
 {\large \noindent ulem also has \uuline{some other} cool \uwave{underlines}.}
+
+\subfile{sections/example.tex}
+
+% BIB:
+\newpage
+\printbibliography
 
 \end{document}
