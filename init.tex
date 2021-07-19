@@ -1,17 +1,94 @@
 \documentclass[12pt]{article}
-\usepackage{fontspec}
 
-\setmainfont{FreeSans}
-\title{Sample font document}
-\author{Overleaf}
-\date{\today}
+% #################### PREAMBLE ##########################
+
+% Global margins for the document
+\usepackage[margin=0.6cm]{geometry}
+
+% Define spacing between paragraphs in the document
+\setlength{\parindent}{0.5cm} % default indentation before the first line of a paragraph.
+\setlength{\topskip}{0.2cm} % indentation at the begging of the first paragraph of every page.
+\setlength{\parskip}{0.3cm} % indentation after every paragraph
+
+% Font configurations:
+\usepackage{fontspec}
+\setmainfont{FreeSerif}
+
+% Math related packages:
+\usepackage{amsmath, amssymb}
+
+% Embedding *.jpg abd *.png images
+\usepackage{graphicx}
+\graphicspath{{data/}{../data/}} % define the path to the images
+
+% Provides an underline command which will break over line ends:
+\usepackage{ulem}
+
+% For inserting loremipsum random text:
+\usepackage[pangram]{blindtext}
+
+% #################### DOCUMENT BEGIN ####################
 
 \begin{document}
-\maketitle
 
-This is an \textit{example} of a document compiled
-with \textbf{XeLaTeX}. LuaLaTeX should also work too.
+\begin{center}
+    {\Huge Big Centered Text}
+\end{center}
 
-тва също требе да баца а ?
+1. Tiny noindent text: \\
+{\tiny\noindent\Blindtext[1][1]}
+
+2. Scriptsize text with added additional 4cm indentation, which is then removed -4cm:
+
+\addtolength{\parindent}{4cm}
+{\scriptsize\Blindtext[1][1]}
+\addtolength{\parindent}{-4cm}
+
+3. Footnotesize flush right text:
+\begin{flushright}
+{\footnotesize\Blindtext[1][1]}
+\end{flushright}
+
+4. Normalsize flus left text:
+\begin{flushleft}
+{\normalsize\Blindtext[1][1]}
+\end{flushleft}
+
+5. large centered text:
+\begin{center}
+{\large Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
+\end{center}
+
+6. Large text after 2 newlines (baselineskip) : \\[2\baselineskip]
+{\Large Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
+
+7. Graphics with set width 0.3 of linewidth:
+\begin{center}
+    \includegraphics[width=0.3\linewidth]{sample.png}
+\end{center}
+
+\newpage
+
+8. LaTeX Page layout and Measurements (width=linewidth):
+\begin{center}
+    \includegraphics[width=\linewidth]{page_layout.png}
+\end{center}
+
+9. LARGE text: \\
+{\LARGE \indent Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
+
+10. huge text with bold, italic and standard underline \\
+{\huge \indent Nisi qui \textbf{culpa} \textit{pariatur} \underline{velit deserunt} nulla nulla dolor cillum est do nulla ut.} \\
+
+11. Huge text with combined bold, italic and standard underline \\
+{\Huge \indent Nisi qui culpa pariatur velit deserunt \underline{\textbf{\textit{nulla dolor cillum est}}} do nulla ut.} \\
+
+12. This is what happens when you underline long text: \\
+\underline{\textbf{Unerlining a long string of text is kinda hard in latex with the default underline so we can use ulem}. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.} \\
+
+12. We can finx the above problem with the package ulem using uline: \\
+\uline{\textbf{Same with ulem}. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
+
+{\large \noindent ulem also has \uuline{some other} cool \uwave{underlines}.}
 
 \end{document}
