@@ -12,7 +12,7 @@ help:
 
 ## TARGETS
 .PHONY: build
-build: clean ## run latexmk with xelatex
+build: ## run latexmk with xelatex
 	latexmk -xelatex -jobname=./out/out -Werror -interaction=nonstopmode $(INIT_FILE)
 
 watch: clean ## run watch script

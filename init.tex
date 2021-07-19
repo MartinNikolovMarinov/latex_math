@@ -15,7 +15,7 @@
 \setmainfont{FreeSerif}
 
 % Math related packages:
-\usepackage{amsmath, amssymb}
+\usepackage{amsmath, amssymb, amsthm}
 
 % Embedding *.jpg abd *.png images
 \usepackage{graphicx}
@@ -126,6 +126,34 @@
 {\large \noindent ulem also has \uuline{some other} cool \uwave{underlines}.}
 
 \subfile{sections/example.tex}
+
+\section{Basic Math Equations}
+
+\subsection{Displaystyle math equation}
+
+\begin{equation} % equivalent to $$ .. $$
+    \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}
+\end{equation}
+
+\subsection{Inline math with display style mode}
+
+Ex qui anim eu consequat est excepteur ea est. Exercitation officia pariatur pariatur nostrud. Cillum cillum proident minim officia ex. Aliquip ut officia sit voluptate quis dolor sint proident tempor aliquip qui enim. $ \displaystyle \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6} $ Elit veniam minim commodo proident do aliqua Lorem sunt ex dolore. Irure adipisicing enim eu velit eiusmod reprehenderit. Sit exercitation minim sunt et.
+
+\subsection{Inline math with text style mode}
+
+Ex qui anim eu consequat est excepteur ea est. Exercitation officia pariatur pariatur nostrud. Cillum cillum proident minim officia ex. Aliquip ut officia sit voluptate quis dolor sint proident tempor aliquip qui enim. $ \textstyle \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6} $ Elit veniam minim commodo proident do aliqua Lorem sunt ex dolore. Irure adipisicing enim eu velit eiusmod reprehenderit. Sit exercitation minim sunt et.
+
+\subsection{Brakets sizes}
+
+These are a bit unreadable:
+\begin{equation*}
+    ( \sum_{n=0}^N ( \frac{1}{a + b} )^2 )^2
+\end{equation*}
+
+\noindent We can use left and right braket:
+\begin{equation*}
+    \left( \sum_{n=0}^N \left( \frac{1}{a + b} \right)^2 \right)^2
+\end{equation*}
 
 % BIB:
 \newpage
