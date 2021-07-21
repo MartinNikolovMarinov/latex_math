@@ -2,17 +2,20 @@
 
 % #################### PREAMBLE ##########################
 
-% Global margins for the document
+% Global margins for the document:
 \usepackage[margin=0.6cm]{geometry}
 
-% Define spacing between paragraphs in the document
+% Define spacing between paragraphs in the document:
 \setlength{\parindent}{0.5cm} % default indentation before the first line of a paragraph.
-\setlength{\topskip}{0.2cm} % indentation at the begging of the first paragraph of every page.
+\setlength{\topskip}{0.2cm} % indentation at the begging of the first paragraph of every page:
 \setlength{\parskip}{0.3cm} % indentation after every paragraph
 
 % Font configurations:
 \usepackage{fontspec}
 \setmainfont{FreeSerif}
+
+% For justify and some other alignment extensions:
+\usepackage{ragged2e}
 
 % Math related packages:
 \usepackage{amsmath, amssymb, amsthm}
@@ -23,6 +26,17 @@
 
 % Provides an underline command which will break over line ends:
 \usepackage{ulem}
+
+% Better lines for tables:
+\usepackage{hhline}
+
+% To use arrays:
+\usepackage{array}
+
+% Custom commands for table alignment when dealing with a lot of text (needs array and ragged2e):
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % Hyper links to places inside the document:
 \usepackage{hyperref}
@@ -37,6 +51,11 @@
     unicode=true,
 }
 \urlstyle{same}
+
+% For pretty quotes:
+\usepackage{epigraph}
+\setlength\epigraphwidth{1\textwidth}
+\setlength\epigraphrule{0pt}
 
 % Bibliography:
 \usepackage{csquotes}
@@ -73,7 +92,9 @@
 
 4. Normalsize flus left text:
 \begin{flushleft}
-{\normalsize\Blindtext[1][1]}
+{\normalsize Something in this document. This paragraph contains no information and its purposes is to provide an example on how to insert white spaces and lines breaks. Right here -> \textbackslash\textbackslash \\
+When a line break is inserted, the text is not indented, there are a couple of commands for line breaks. \textbackslash newline \newline
+This paragraph contains full line break. \textbackslash hfill and \textbackslash break \hfill \break For combining two commands}
 \end{flushleft}
 
 5. large centered text:
@@ -82,7 +103,8 @@
 \end{center}
 
 6. Large text after 2 newlines (baselineskip) : \\[2\baselineskip]
-{\Large Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut. Nisi qui culpa pariatur velit deserunt nulla nulla dolor cillum est do nulla ut.}
+
+{\Large The environments center, flushleft, flushright, justify should only be used with text paragraphs. They can NOT format other LaTeX objects!}
 
 7. Graphics with set width 0.3 of linewidth:
 \begin{center}
@@ -98,7 +120,9 @@
 
 \newpage
 
-\section{LaTeX includegraphics wrapped in a figure}
+\section{Images and figures}
+
+\subsection{LaTeX includegraphics wrapped in a figure}
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\linewidth]{page_layout.png}
@@ -125,7 +149,7 @@
 
 {\large \noindent ulem also has \uuline{some other} cool \uwave{underlines}.}
 
-\subfile{sections/example.tex}
+\subfile{sections/citations.tex}
 
 \section{Basic Math Equations}
 
@@ -154,6 +178,61 @@ These are a bit unreadable:
 \begin{equation*}
     \left( \sum_{n=0}^N \left( \frac{1}{a + b} \right)^2 \right)^2
 \end{equation*}
+
+\section{Tables and Arrays}
+
+\subsection{Simple Tables}
+
+\begin{tabular}{lcr}
+    left justified & centered & right justified \\
+    l & c & r
+\end{tabular}
+
+\noindent Table with boarders \\
+
+\noindent
+\begin{tabular}{ | l |c r| }
+    \hline
+    left justified & centered & right justified \\
+    \hline
+    l & c & r \\
+    \hline
+\end{tabular}
+
+\noindent Note that begin center is quite limited for tables, but can work for a quick and simple solution sometimes: \\
+\begin{center}
+    \begin{tabular}{ | l |c r| }
+        \hhline{ | - | - | - | }
+        left justified & centered & right justified \\
+        \hhline{ | - | ~ - | }
+        l & c & r \\
+        \hhline{ | - | ~ - | }
+    \end{tabular}
+\end{center}
+
+\subsection{Long text in column and other table packages}
+
+This problem: \\
+\begin{tabular}{ | l | c | r | }
+    \hline
+    long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table &
+    long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table &
+    long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table long text in table
+    \\
+    \hline
+\end{tabular}
+
+\noindent Can be fixed like this, with 3 custom commands defined in the preamble:
+
+\begin{tabular}{ | L{5cm} | C{4cm} | R{3cm} | L{4cm} | }
+    \hline
+    For more advanced tables we can use the \textbf{\textbackslash usepackage\{booktabs\}} - Provides extra commands to make tables more attractive &
+    For more advanced tables we can use \textbf{\textbackslash usepackage\{tabularx\}}, which provides another way to control the width of the columns &
+    For more advanced tables we can use \textbf{\textbackslash usepackage\{colortbl\}} to add color to tables, including line colors and cell background colors &
+    For more advanced tables we can use \textbf{\textbackslash usepackage\{longtable\}} for large tables that span across multiple pages
+    \\
+    \hline
+\end{tabular}
 
 % BIB:
 \newpage
