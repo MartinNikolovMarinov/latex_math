@@ -3,7 +3,11 @@
 % #################### PREAMBLE ##########################
 
 % Global margins for the document:
-\usepackage[margin=0.6cm]{geometry}
+\usepackage[left=0.6cm,
+    right=0.6cm,
+    bottom=2cm,
+    top=2cm,
+]{geometry}
 
 % Define spacing between paragraphs in the document:
 \setlength{\parindent}{0.5cm} % default indentation before the first line of a paragraph.
@@ -21,6 +25,12 @@
 \usepackage{amsmath, amssymb, amsthm}
 % For vectors:
 \usepackage{esvect}
+% Proper calculates where the not line should be drawn:
+\usepackage{centernot}
+% Theorem definitions:
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma} % a lemma that shares a counter with the Theorem.
+\newtheorem{defn}{Definition}
 
 % Embedding *.jpg abd *.png images
 \usepackage{graphicx}
@@ -31,6 +41,9 @@
 
 % Better lines for tables:
 \usepackage{hhline}
+
+% Allows enumerate environment to customize the label:
+\usepackage{enumitem}
 
 % Multirow :
 \usepackage{multirow}
@@ -65,6 +78,18 @@
 \setlength\epigraphwidth{1\textwidth}
 \setlength\epigraphrule{0pt}
 
+% For a footer and header:
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhead[L]{Top Left Head}
+\fancyhead[C]{Center Head}
+\fancyhead[R]{Top Right Head}
+
+\fancyfoot[L]{Bottom Left Foot}
+\fancyfoot[C]{Page \thepage}
+\fancyfoot[R]{Bottom Right Foot}
+
 % Bibliography:
 \usepackage{csquotes}
 \usepackage[backend=biber]{biblatex}
@@ -79,6 +104,39 @@
 % #################### DOCUMENT BEGIN ####################
 
 \begin{document}
+
+% Title:
+\begin{titlepage}
+    \begin{center}
+        \Large
+        \textbf{Курсова Работа} \\
+        Име на предмета Esse deserunt consequat \\
+        \vspace*{0.2cm}
+        \large
+        Име на университет Dolor eu et enim irure voluptate deserunt official \\
+        \vspace*{3cm}
+
+        \Large
+        Тема: \\
+        \huge
+        \textbf{Deserunt reprehenderit magna laborum \\ dolor adipisicing in fugiat}
+
+        \vfill
+
+        \large
+        Лого на унито:
+        \begin{center}
+            \includegraphics[width=0.3\linewidth]{sample.png}
+        \end{center}
+
+        \large \vfill
+        \today \\
+        Пешо Пешев Пешков \\
+        Фак. номер: 123456
+    \end{center}
+\end{titlepage}
+
+\newpage
 
 \begin{center}
     {\Huge Big Centered Text}
@@ -95,12 +153,12 @@
 
 3. Footnotesize flush right text:
 \begin{flushright}
-{\footnotesize\Blindtext[1][1]}
+{\footnotesize Cillum proident aliquip ipsum do do cupidatat laboris. Mollit proident eiusmod adipisicing ad ipsum nulla consectetur esse. Incididunt laboris irure do eu ad dolore ad ea pariatur sint. Eu ea exercitation incididunt excepteur quis.}
 \end{flushright}
 
 4. Normalsize flus left text:
 \begin{flushleft}
-{\normalsize Something in this document. This paragraph contains no information and its purposes is to provide an example on how to insert white spaces and lines breaks. Right here -> \textbackslash\textbackslash \\
+{\normalsize Something. This paragraph contains no information and its purposes is to provide an example on how to insert white spaces and lines breaks. Right here -> \textbackslash\textbackslash \\
 When a line break is inserted, the text is not indented, there are a couple of commands for line breaks. \textbackslash newline \newline
 This paragraph contains full line break. \textbackslash hfill and \textbackslash break \hfill \break For combining two commands}
 \end{flushleft}
@@ -114,23 +172,23 @@ This paragraph contains full line break. \textbackslash hfill and \textbackslash
 
 {\Large The environments center, flushleft, flushright, justify should only be used with text paragraphs. They can NOT format other LaTeX objects!}
 
-7. Graphics with set width 0.3 of linewidth:
-\begin{center}
-    \includegraphics[width=0.3\linewidth]{sample.png}
-\end{center}
-
 \newpage
 
 \tableofcontents
 \listoffigures
 \listoftables
-\setcounter{section}{8}
+\setcounter{section}{7}
 
 \newpage
 
 \section{Images and figures}
 
-\subsection{LaTeX includegraphics wrapped in a figure}
+Graphics with set width 0.3 of linewidth: \\
+\begin{center}
+    \includegraphics[width=0.3\linewidth]{sample.png}
+\end{center}
+
+\noindent LaTeX includegraphics wrapped in a figure: \\
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\linewidth]{page_layout.png}
@@ -157,7 +215,55 @@ This paragraph contains full line break. \textbackslash hfill and \textbackslash
 
 {\large \noindent ulem also has \uuline{some other} cool \uwave{underlines}.}
 
+\subsection{Line fills and rules}
+
+\noindent \hrulefill
+
+\noindent Some text before fill \hrulefill
+
+\noindent Fill by dots \dotfill
+
+\noindent Rule can create more customizeable lines:
+
+\noindent \rule{\linewidth}{0.4pt}
+
+\begin{center}
+    \rule{5cm}{0.4cm}
+\end{center}
+
 \subfile{sections/citations.tex}
+
+\subsection{References to labels}
+
+This number will take you to the specified label - \ref{eq:PythogoreanTheorem}
+
+\noindent It can also be done as a hyperlink - \hyperref[eq:PythogoreanTheorem]{Any Custom Lable Can Be A Hyperlink}
+
+\noindent The href command can be used for URL redirection - \href{https://example.com/}{This link will go to example.com}
+
+\subsection{Enumeration and listing}
+
+\begin{enumerate}[label=\arabic*]
+    \item First Item
+    \item Second Item
+    \begin{enumerate}[label=\arabic*]
+        \item First Sub Item
+        \item[$\rightarrow$] Custom label
+        \item Second Sub Item
+    \end{enumerate}
+    \item Third Item
+\end{enumerate}
+
+\begin{itemize}
+    \item First Item
+    \item Second Item
+    \begin{itemize}
+        \item First Sub Item
+        \item[$\rightarrow$] Custom label
+        \item Second Sub Item
+    \end{itemize}
+    \item Third Item
+\end{itemize}
 
 \section{Basic Math Equations}
 
@@ -198,7 +304,7 @@ These are a bit unreadable:
     \sum_{\substack{n=0 \\ n \text{ odd}}}^\infty a_{n} x^n
 \end{equation*}
 
-\subsection{Spaces in Integral equations}
+\subsection{Spaces in equations}
 
 \begin{align*}
     \int f(x) \mathrm{d}x \\
@@ -214,12 +320,74 @@ Spacing Commands:
     \end{array}
 \end{equation*}
 
+Using \textbf{hspace} and text to handle simple spacing issues:
+\begin{equation*}
+    x = 1000 \text{\hspace{1cm} and \hspace{1cm}} y = 200
+\end{equation*}
+
 \subsection{Vectors}
 
 Vectors use the esvect package:
 \begin{equation*}
     \vv{\mathrm{proj}} \quad \vv{v_1} \quad \vv*{v}{1}
 \end{equation*}
+
+\subsection{Radicals}
+
+\begin{center}
+If $ ax^2 + bx + c = 0 $ then $ \displaystyle x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $
+\end{center}
+
+\begin{equation*}
+    \begin{array}{c c c}
+        \displaystyle \sqrt[10]{\frac{1}{2}} &
+        \displaystyle \sqrt[\sqrt{7}]{\frac{\sqrt[3]{\sqrt[8]{1+2}}}{\sqrt{12x}}} &
+        \displaystyle \left( \sqrt[7^{\sqrt{908}}]{12}^{\sqrt[2]{8}^{\sqrt{\frac{2}{1721}}}} \right)^7 \\
+    \end{array}
+\end{equation*}
+
+\section{Negation}
+
+Build-in negations:
+\begin{align*}
+    a &\neq b \\
+    a &\ngtr b \\
+    a &\nless b \\
+    a &\ngeq b \\
+    a &\nleq b \\
+    a &\not \approx b \\
+    P &\not \implies Q \\
+\end{align*}
+
+\noindent For negation of symbols that do not have negation by default we can use \textbf{\textbackslash usepackage\{centernot\}}:
+\begin{align*}
+    a &\centernot \approx b \\
+    P &\centernot \implies Q \\
+\end{align*}
+
+\section{Overset and Underset}
+
+\begin{equation*}
+    \begin{array}{c c c}
+        a \overset{?}{=} b &
+        f(x) \underset{x \to \infty}{\longrightarrow} 0 &
+        f(x) \overset{?}{\underset{x \to \infty}{\longrightarrow}} 0
+    \end{array}
+\end{equation*}
+
+\subsection{Theorems}
+
+\begin{thm}[The Pythogorean Theorem] \label{eq:PythogoreanTheorem}
+    $$ a^2 + b^2 = c^2 $$
+\end{thm}
+
+\begin{lem}
+    $$  a = b, b = a $$
+\end{lem}
+
+\begin{defn}
+    $$ \forall \mathrm{A}: \varnothing \subseteq \mathrm{A} $$
+\end{defn}
 
 \section{Tables}
 
@@ -399,6 +567,8 @@ The simplest way to fromat code is to use verbatim:
         return nil
     }
 \end{minted}
+
+\noindent If needed, the minted package can also load snippets from files!
 
 % BIB:
 \newpage
