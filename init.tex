@@ -33,6 +33,9 @@
 \newtheorem{defn}{Definition}
 % Package for system of equations
 \usepackage{systeme}
+% For graphs:
+\usepackage{tikz}
+\usepackage{pgfplots}
 
 % Embedding *.jpg abd *.png images
 \usepackage{graphicx}
@@ -653,6 +656,27 @@ The simplest way to fromat code is to use verbatim:
 \end{minted}
 
 \noindent If needed, the minted package can also load snippets from files!
+
+\section{Plotting Equations with tikzpicture and pgfplots axis}
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[xmin=-10,
+            xmax=10,
+            ymin=-10,
+            ymax=10,
+            axis x line=middle,
+            axis y line=middle,
+            samples=100,
+            width=0.6\textwidth,
+            height=300]
+
+            \addplot[domain=-20:20]{2*x+2};
+            \addplot[domain=-20:20, color=red]{x^2-2};
+            \addplot[domain=-20:20, color=blue]{6*sin(deg(x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
 
 % BIB:
 \newpage
